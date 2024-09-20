@@ -72,7 +72,7 @@ class TopSection extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 25),
                 Text(
                   'Hi Saim,',
                   style: TextStyle(
@@ -98,71 +98,36 @@ class TopSection extends StatelessWidget {
 
         // Custom toggle button with stack for opacity control
         Positioned(
-          top: screenHeight * 0.18,
+          top: screenHeight * 0.105,
           right: 20,
           child: Stack(
             alignment: Alignment.center,
             children: [
-              PopupMenuButton<String>(
-                offset: const Offset(-20, 50),
-                color: Colors.white,
-                icon: Opacity(
-                  opacity: 0.7,
-                  child: Container(
-                    width: screenWidth * 0.2,
-                    height: screenWidth * 0.2,
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFEAE9FF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(100),
-                          bottomLeft: Radius.circular(100),
-                          bottomRight: Radius.circular(100),
-                        ),
+              Opacity(
+                opacity: 0.7,
+                child: Container(
+                  width: screenWidth * 0.2,
+                  height: screenWidth * 0.2,
+                  decoration: const ShapeDecoration(
+                    color: Color(0xFFEAE9FF),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(100),
+                        bottomLeft: Radius.circular(100),
+                        bottomRight: Radius.circular(100),
                       ),
-                      shadows: [
-                        BoxShadow(
-                          color: Color(0x266D6BE7),
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
-                          spreadRadius: 1,
-                        )
-                      ],
                     ),
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0x266D6BE7),
+                        blurRadius: 10,
+                        offset: Offset(0, 4),
+                        spreadRadius: 1,
+                      )
+                    ],
                   ),
                 ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    bottomLeft:
-                        Radius.circular(8), // Custom radius for bottom left
-                    bottomRight:
-                        Radius.circular(8), // Custom radius for bottom right
-                  ),
-                ),
-                onSelected: (String result) {
-                  switch (result) {
-                    case 'Profile':
-                      Navigator.of(context).pushNamed('/profile');
-                      // Handle edit action
-                      break;
-                    case 'Holiday application':
-                      Navigator.of(context).pushNamed('/applyholiday');
-                      // Handle edit action
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                  const PopupMenuItem<String>(
-                    value: 'Profile',
-                    child: Text('Profile'),
-                  ),
-                  const PopupMenuItem<String>(
-                    value: 'Holiday application',
-                    child: Text('Holiday application'),
-                  ),
-                ],
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -182,6 +147,82 @@ class TopSection extends StatelessWidget {
                     // White color for the line
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          bottom: screenHeight * 0.0325,
+          right: screenWidth * 0.04,
+          child: Row(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                decoration: const BoxDecoration(
+                  color: Color(0xffEAEAFF),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(2),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  "5 new booking\nrequests",
+                  style: TextStyle(
+                    color: Color(0xff38385E),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                decoration: const BoxDecoration(
+                  color: Color(0xffFFEBF0),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(2),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  "10 new cleaners",
+                  style: TextStyle(
+                    color: Color(0xff38385E),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                decoration: const BoxDecoration(
+                  color: Color(0xffECFCFF),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(2),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  "2 cleaners on\nholiday",
+                  style: TextStyle(
+                    color: Color(0xff38385E),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
               ),
             ],
           ),

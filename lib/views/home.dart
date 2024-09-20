@@ -5,195 +5,758 @@ import 'bookings.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-   int _selectedIndex = 0; 
-      void _onItemTapped(int index) {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       // Handle navigation logic here for each index if required
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-   
-  final List<Widget> _pages = [
-    // Home Page
-   Home(),
-    // Bookings Page
-    BookingScreen(),
-    // Settings Page
-    Column(
-      children: const [
-        Text(
+
+    final List<Widget> pages = [
+      // Home Page
+      const Home(),
+
+      BookingScreen(),
+      // Settings Page
+      const Center(
+        child: Text(
           'Settings Page',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-      ],
-    ),
-    // Notifications Page
-    Column(
-      children: const [
-        Text(
+      ),
+      // Notifications Page
+      const Center(
+        child: Text(
           'Notifications Page',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-      ],
-    ),
-  ];
+      ),
+    ];
 
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      body:_selectedIndex == 0 
-            ? Column(
-        children: [
-          TopSection(screenWidth: screenWidth, screenHeight: screenHeight),
+      body: _selectedIndex == 0
+          ? Column(
+              children: [
+                TopSection(
+                    screenWidth: screenWidth, screenHeight: screenHeight),
 
-          // Main content section (Your Packages and Services)
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Your Packages',
-                    style: TextStyle(
-                      color: Color(0xFF1E116B),
-                      fontSize: 20,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: screenWidth,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                // Main content section (Your Packages and Services)
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Column(
-                      
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        
-                        const Text(
-                          'Your packages appear here',
-                          style: TextStyle(
-                            color: Color(0xFF808080),
-                            fontSize: 14,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                         const SizedBox(height: 10),
-                        Image.asset(
-                          'public/images/emptyservice.png', // Replace with your image asset path
-                          height: 80,
-                          width: 80,
-                        ),
-                       
                         const SizedBox(height: 10),
                         const Text(
-                          'No package subscribes yet...',
+                          "Today's work",
                           style: TextStyle(
-                            color: Color(0xFF808080),
-                            fontSize: 12,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF1E116B),
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
+                        const SizedBox(height: 16),
+                        Card(
+                          elevation: 0,
+                          color: Color(0xffF5F5F5),
+                          margin: const EdgeInsets.all(8),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(2),
+                              topRight: Radius.circular(25),
+                              bottomLeft: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
+                            side: BorderSide(
+                              color: Color(0xffEAEAFF), // Border color
+                              width: 1.5, // Border width
+                            ),
+                          ),
+                          clipBehavior:
+                              Clip.hardEdge, // Optional: to clip overflow
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              minWidth: 250, // Set minimum width
+                              maxWidth: 350, // Set maximum width
+                              minHeight: 100, // Set minimum height
+                              maxHeight: 250, // Set maximum height
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: screenWidth * 0.15,
+                                      height: screenWidth * 0.15,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffffffff),
+                                        border: Border.all(
+                                          style: BorderStyle.solid,
+                                          color: const Color(0xffEAEAFF),
+                                          width: 1.5,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                              screenWidth * 0.01),
+                                          topRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomLeft: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.image,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            "Ali Raza",
+                                            style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                  Icons.location_on_outlined),
+                                              Text(
+                                                "Room 123, Brooklyn St,\n Kepler District",
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Text("1 House"),
+                                          Text(
+                                            "3 washrooms",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          const Text("Time"),
+                                          Text(
+                                            "12:30 PM",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Text("Date"),
+                                              Text(
+                                                '22 Mar 2021',
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 20),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xffFFB457),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(15),
+                                                    topLeft: Radius.circular(2),
+                                                    bottomLeft:
+                                                        Radius.circular(15),
+                                                    bottomRight:
+                                                        Radius.circular(15),
+                                                  ),
+                                                ),
+                                                child: const Text(
+                                                  'Daily',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          elevation: 0,
+                          color: Color(0xffF5F5F5),
+                          margin: const EdgeInsets.all(8),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(2),
+                              topRight: Radius.circular(25),
+                              bottomLeft: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
+                            side: BorderSide(
+                              color: Color(0xffEAEAFF), // Border color
+                              width: 1.5, // Border width
+                            ),
+                          ),
+                          clipBehavior:
+                              Clip.hardEdge, // Optional: to clip overflow
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              minWidth: 250, // Set minimum width
+                              maxWidth: 350, // Set maximum width
+                              minHeight: 100, // Set minimum height
+                              maxHeight: 250, // Set maximum height
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: screenWidth * 0.15,
+                                      height: screenWidth * 0.15,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffffffff),
+                                        border: Border.all(
+                                          style: BorderStyle.solid,
+                                          color: const Color(0xffEAEAFF),
+                                          width: 1.5,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                              screenWidth * 0.01),
+                                          topRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomLeft: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.image,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            "Ali Raza",
+                                            style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                  Icons.location_on_outlined),
+                                              Text(
+                                                "Room 123, Brooklyn St,\n Kepler District",
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Text("1 House"),
+                                          Text(
+                                            "3 washrooms",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          const Text("Time"),
+                                          Text(
+                                            "12:30 PM",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Text("Date"),
+                                              Text(
+                                                '22 Mar 2021',
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 20),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xffFFB457),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(15),
+                                                    topLeft: Radius.circular(2),
+                                                    bottomLeft:
+                                                        Radius.circular(15),
+                                                    bottomRight:
+                                                        Radius.circular(15),
+                                                  ),
+                                                ),
+                                                child: const Text(
+                                                  'Daily',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        const Text(
+                          "View all",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Color(0xFF1E116B),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 25),
+                        const Text(
+                          "Yesterday's work",
+                          style: TextStyle(
+                            color: Color(0xFF1E116B),
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Card(
+                          elevation: 0,
+                          color: Color(0xffF5F5F5),
+                          margin: const EdgeInsets.all(8),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(2),
+                              topRight: Radius.circular(25),
+                              bottomLeft: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
+                            side: BorderSide(
+                              color: Color(0xffEAEAFF), // Border color
+                              width: 1.5, // Border width
+                            ),
+                          ),
+                          clipBehavior:
+                              Clip.hardEdge, // Optional: to clip overflow
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              minWidth: 250, // Set minimum width
+                              maxWidth: 350, // Set maximum width
+                              minHeight: 100, // Set minimum height
+                              maxHeight: 250, // Set maximum height
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: screenWidth * 0.15,
+                                      height: screenWidth * 0.15,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffffffff),
+                                        border: Border.all(
+                                          style: BorderStyle.solid,
+                                          color: const Color(0xffEAEAFF),
+                                          width: 1.5,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                              screenWidth * 0.01),
+                                          topRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomLeft: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.image,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            "Ali Raza",
+                                            style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                  Icons.location_on_outlined),
+                                              Text(
+                                                "Room 123, Brooklyn St,\n Kepler District",
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Text("1 House"),
+                                          Text(
+                                            "3 washrooms",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          const Text("Time"),
+                                          Text(
+                                            "12:30 PM",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Text("Date"),
+                                              Text(
+                                                '22 Mar 2021',
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 20),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xffFFB457),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(15),
+                                                    topLeft: Radius.circular(2),
+                                                    bottomLeft:
+                                                        Radius.circular(15),
+                                                    bottomRight:
+                                                        Radius.circular(15),
+                                                  ),
+                                                ),
+                                                child: const Text(
+                                                  'Daily',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          elevation: 0,
+                          color: Color(0xffF5F5F5),
+                          margin: const EdgeInsets.all(8),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(2),
+                              topRight: Radius.circular(25),
+                              bottomLeft: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
+                            side: BorderSide(
+                              color: Color(0xffEAEAFF), // Border color
+                              width: 1.5, // Border width
+                            ),
+                          ),
+                          clipBehavior:
+                              Clip.hardEdge, // Optional: to clip overflow
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              minWidth: 250, // Set minimum width
+                              maxWidth: 350, // Set maximum width
+                              minHeight: 100, // Set minimum height
+                              maxHeight: 250, // Set maximum height
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: screenWidth * 0.15,
+                                      height: screenWidth * 0.15,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffffffff),
+                                        border: Border.all(
+                                          style: BorderStyle.solid,
+                                          color: const Color(0xffEAEAFF),
+                                          width: 1.5,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                              screenWidth * 0.01),
+                                          topRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomLeft: Radius.circular(
+                                              screenWidth * 0.16),
+                                          bottomRight: Radius.circular(
+                                              screenWidth * 0.16),
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.image,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            "Ali Raza",
+                                            style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                  Icons.location_on_outlined),
+                                              Text(
+                                                "Room 123, Brooklyn St,\n Kepler District",
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Text("1 House"),
+                                          Text(
+                                            "3 washrooms",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          const Text("Time"),
+                                          Text(
+                                            "12:30 PM",
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              const Text("Date"),
+                                              Text(
+                                                '22 Mar 2021',
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 20),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xffFFB457),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(15),
+                                                    topLeft: Radius.circular(2),
+                                                    bottomLeft:
+                                                        Radius.circular(15),
+                                                    bottomRight:
+                                                        Radius.circular(15),
+                                                  ),
+                                                ),
+                                                child: const Text(
+                                                  'Daily',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        const Text(
+                          "View all",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Color(0xFF1E116B),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 25),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    'Select the service and choose the \nnumber of washrooms you want cleaned.',
-                    style: TextStyle(
-                      color: Color(0xFF6D6BE7),
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Services',
-                    style: TextStyle(
-                      color: Color(0xFF1E116B),
-                      fontSize: 20,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                
-                  // Services in GridView
-                  GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2, // Number of columns
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 3 / 4, // Adjust the aspect ratio
-                    physics: const NeverScrollableScrollPhysics(), // Disable scrolling inside the grid
-                    children: List.generate(1, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/servicedetail');
-                        },
-                        child: Card(
-                          color: const Color(0xFFEAE9FF),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          elevation: 2,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Image.asset(
-                                  'public/images/bathroom.png', // Replace with your image asset path
-                                  height: 130,
-                                  width: 130,
-                                ),
-                              ),
-                              const Text(
-                                'Bathroom Cleaning',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF38385E),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ): _pages.elementAt(_selectedIndex),
+                ),
+              ],
+            )
+          : pages.elementAt(_selectedIndex),
 
       // Bottom Navigation Bar
-       bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         elevation: 15,
@@ -223,4 +786,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
